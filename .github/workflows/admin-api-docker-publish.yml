@@ -4,7 +4,10 @@
 # submodules) and pins this app's submodule to the commit that triggered
 # the run. It requires the hub's main branch to carry the submodule
 # layout, and this repository to hold the Actions secrets and variables
-# referenced below under the same names.
+# referenced below under the same names. The job runs in the GitHub
+# `production` environment; any name the environment does not define
+# falls back to the repository-level secret or variable. The Docker Hub
+# username is a variable, not a secret — only the token is secret.
 name: Build & Push API Docker Image
 
 on:
@@ -19,6 +22,7 @@ env:
 
 jobs:
   build-and-push:
+    environment: production
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -39,7 +43,7 @@ jobs:
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Extract metadata

@@ -99,9 +99,9 @@ Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 
 ## Required environment variables
 
-The Docker image workflow (`.github/workflows/admin-api-docker-publish.yml`) reads the following GitHub Actions secrets. Register them on this repository under exactly these names. Values are never committed to the repository.
+The Docker image workflow (`.github/workflows/admin-api-docker-publish.yml`) runs in the GitHub `production` environment and reads the following GitHub Actions secret and variable. Register them on this repository under exactly these names, at repository level as the default (an environment-level entry overrides it). Values are never committed to the repository.
 
-| Name | Used for |
-| --- | --- |
-| `DOCKERHUB_USERNAME` | Docker Hub account that owns the `hashibutogarasu/karasu-lab-admin-api` image |
-| `DOCKERHUB_TOKEN` | Docker Hub access token used to log in and push the image |
+| Name | Kind | Used for |
+| --- | --- | --- |
+| `DOCKERHUB_USERNAME` | Variable | Docker Hub account that owns the `hashibutogarasu/karasu-lab-admin-api` image |
+| `DOCKERHUB_TOKEN` | Secret | Docker Hub access token used to log in and push the image |
