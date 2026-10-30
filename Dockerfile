@@ -1,6 +1,6 @@
 FROM node:22-alpine AS base
 ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
+ENV PATH="$PNPM_HOME/bin:$PATH"
 RUN apk add --no-cache git && corepack enable && corepack prepare pnpm@11.12.0 --activate
 
 FROM base AS pruner
