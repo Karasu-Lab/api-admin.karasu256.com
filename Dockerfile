@@ -21,22 +21,23 @@ COPY --from=installer /app/ .
 COPY --from=pruner /app/out/full/ .
 RUN pnpm --filter api.admin.karasu256.com run build
 
-FROM base AS deployer
+FROM base AS prod-installer
 WORKDIR /app
-COPY --from=installer /app/ .
+COPY --from=pruner /app/out/json/ .
+COPY --from=pruner /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
+RUN pnpm install --frozen-lockfile --prod
 COPY --from=pruner /app/out/full/ .
-RUN pnpm --filter api.admin.karasu256.com deploy --prod /app/deploy
 
 FROM node:22-alpine AS runner
-WORKDIR /app
 
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nestjs
 
-COPY --from=deployer --chown=nestjs:nodejs /app/deploy/node_modules ./node_modules
-COPY --from=builder --chown=nestjs:nodejs /app/apps/api.admin.karasu256.com/dist ./dist
-COPY --from=builder --chown=nestjs:nodejs /app/apps/api.admin.karasu256.com/configs ./configs
+COPY --from=prod-installer --chown=nestjs:nodejs /app ./
+COPY --from=builder --chown=nestjs:nodejs /app/apps/api.admin.karasu256.com/dist ./apps/api.admin.karasu256.com/dist
+COPY --from=builder --chown=nestjs:nodejs /app/apps/api.admin.karasu256.com/configs ./apps/api.admin.karasu256.com/configs
 
+WORKDIR /app/apps/api.admin.karasu256.com
 USER nestjs
 EXPOSE 3006
 ENV NODE_ENV=production
