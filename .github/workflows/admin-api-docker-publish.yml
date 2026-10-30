@@ -1,4 +1,4 @@
-# Moved from Karasu-Lab/karasu256.com/.github/workflows/admin-api-docker-publish.yml.
+# Moved from Karasu-Lab/Karasu-Lab/.github/workflows/admin-api-docker-publish.yml.
 # This app depends on workspace packages, so the deploy still builds in
 # the hub repository's tree: this workflow clones the hub (with its
 # submodules) and pins this app's submodule to the commit that triggered
@@ -30,7 +30,7 @@ jobs:
     steps:
       - name: Assemble the workspace from the hub repository
         run: |
-          git clone --recurse-submodules --branch main https://github.com/Karasu-Lab/karasu256.com.git .
+          git clone --recurse-submodules --branch main https://github.com/Karasu-Lab/Karasu-Lab.git .
           git -C apps/api.admin.karasu256.com fetch origin "${{ github.sha }}"
           git -C apps/api.admin.karasu256.com checkout --detach "${{ github.sha }}"
 
