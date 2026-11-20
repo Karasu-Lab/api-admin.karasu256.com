@@ -20,7 +20,7 @@
   "dependencies": {
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
-    "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/platform-express": "^12.5.1",
     "cloudflare-access": "^1.1.0",
     "dockerode": "^4.0.2",
     "js-yaml": "^4.1.1",
