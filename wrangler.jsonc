@@ -12,6 +12,7 @@
   },
   "routes": [{ "pattern": "api-admin.karasu256.com", "custom_domain": true }],
   "preview_urls": true,
+  "previews": {},
   "env": {
     "local": {
       "routes": [],
