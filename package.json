@@ -22,7 +22,7 @@
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
     "cloudflare-access": "^1.1.0",
-    "dockerode": "^4.0.2",
+    "dockerode": "^5.0.1",
     "js-yaml": "^4.1.1",
     "nestjs-zod": "^5.4.0",
     "reflect-metadata": "^0.2.2",
