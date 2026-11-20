@@ -11,11 +11,54 @@
     },
   },
   "routes": [{ "pattern": "api-admin.karasu256.com", "custom_domain": true }],
+  "d1_databases": [
+    {
+      "binding": "ADMIN_DB",
+      "database_id": "aeeaec13-7a6f-4fc2-b358-c21a3a8cc803",
+      "database_name": "admin",
+    },
+  ],
+  "vars": {
+    "APP_ENV": "production",
+    "APP_URL": "https://admin.karasu256.com",
+    "AUTH_API_URL": "https://api-auth.karasu256.com",
+    "GIT_API_URL": "https://git.karasu256.com",
+  },
   "preview_urls": true,
-  "previews": {},
+  "previews": {
+    "d1_databases": [
+      {
+        "binding": "ADMIN_DB",
+        "database_id": "5922315b-966f-4475-8866-abbfb1542ceb",
+        "database_name": "admin-preview",
+      },
+    ],
+    "vars": {
+      "APP_ENV": "preview",
+      "APP_URL": "https://dev-admin.karasu256.com",
+      "AUTH_API_URL": "https://dev-api-auth.karasu256.com",
+      "GIT_API_URL": "https://dev-git.karasu256.com",
+    },
+  },
   "env": {
     "local": {
       "routes": [],
+      "d1_databases": [
+        {
+          "binding": "ADMIN_DB",
+          "database_id": "aeeaec13-7a6f-4fc2-b358-c21a3a8cc803",
+          "database_name": "admin",
+        },
+      ],
+      "vars": {
+        "APP_ENV": "local",
+        "APP_URL": "http://localhost:3003",
+        "AUTH_API_URL": "http://localhost:8790",
+        "GIT_API_URL": "https://dev-git.karasu256.com",
+        "BETTER_AUTH_SECRET": "local-development-better-auth-secret-not-for-production",
+        "INTERNAL_API_SECRET": "local-development-internal-api-secret",
+        "GH_APP_WEBHOOK_SECRET": "local-development-webhook-secret",
+      },
     },
   },
 }
