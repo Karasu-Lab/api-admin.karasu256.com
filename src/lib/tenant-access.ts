@@ -27,12 +27,12 @@ export class TenantAccess {
   async requireUserId(): Promise<string> {
     const user = await getSessionUser(getClientConfig().authApiUrl, this.request);
     if (!user) throw new UnauthorizedError();
-    return user.uid;
+    return user.id;
   }
 
   async optionalUserId(): Promise<string | null> {
     const user = await getSessionUser(getClientConfig().authApiUrl, this.request);
-    return user ? user.uid : null;
+    return user ? user.id : null;
   }
 
   hasSetupRole(role: string): boolean {
