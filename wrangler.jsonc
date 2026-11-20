@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "api-admin-karasu256-com",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "logs": {
+      "enabled": true,
+      "invocation_logs": false,
+    },
+  },
+  "routes": [{ "pattern": "api-admin.karasu256.com", "custom_domain": true }],
+  "preview_urls": true,
+  "env": {
+    "local": {
+      "routes": [],
+    },
+  },
+}
