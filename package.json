@@ -16,7 +16,7 @@
     "wrangler": "^4.147.0"
   },
   "dependencies": {
-    "@karasu-lab/types": "0.1.0-b9a53d3",
+    "@karasu-lab/types": "0.1.0-80684cd",
     "@karasu-lab/utils": "0.1.0-11f53a9",
     "better-auth": "^1.7.26",
     "drizzle-orm": "^0.45.4",
