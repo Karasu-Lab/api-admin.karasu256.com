@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { DEFAULT_VERSION_NAMING_PATTERN } from '@karasu-lab/types/shared';
 import { log } from '@karasu-lab/utils/server/log';
 import { getInstallationToken, getTenantOverview, linkTenantPackage, unlinkTenantPackage } from './api-auth';
 import {
@@ -32,6 +31,10 @@ export function packageManifestSchema() {
 }
 
 export type PackageManifest = z.infer<ReturnType<typeof packageManifestSchema>>;
+
+function versionNamingPattern(manifest: PackageManifest | undefined): string {
+  return manifest?.versionNaming?.pattern || '{version}-{shortCommitHash}';
+}
 
 export function linkPackageResultSchema() {
   return z.object({ versionNaming: z.string(), linkedPackages: z.array(tenantLinkedPackageSchema()) });
@@ -111,7 +114,7 @@ export class PackageLinking {
       await this.contents.readJson(token, repository.fullName, this.manifestPath)
     );
     if (!parsedManifest.success) throw new PackageJsonNotFoundError();
-    const pattern = parsedManifest.data.versionNaming?.pattern || DEFAULT_VERSION_NAMING_PATTERN;
+    const pattern = versionNamingPattern(parsedManifest.data);
 
     const files = await this.packageSetupFiles({
       token,
@@ -211,7 +214,7 @@ export class PackageLinking {
             repositoryId: repository.id,
             repositoryFullName: repository.fullName,
             submodulePath: submodule.path,
-            versionNaming: (manifest.success && manifest.data.versionNaming?.pattern) || DEFAULT_VERSION_NAMING_PATTERN,
+            versionNaming: versionNamingPattern(manifest.success ? manifest.data : undefined),
           });
           registered = true;
         } catch (caught) {
